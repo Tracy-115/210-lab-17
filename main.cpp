@@ -26,7 +26,7 @@ int main() {
     }
     output(head);
 
-    addTail(head, entry, 111);
+    addTail(head, 111);
     cout << "After adding to the tail:\n";
     output(head);
 
@@ -81,7 +81,6 @@ void addTail(Node* &head, float value) {
     }
 }
 
-}
 
 void addFront(Node* &head, float value) {
     Node *newNode = new Node;
@@ -133,6 +132,7 @@ void deleteList(Node* &head) {
         current = nextNode;
     }
     head = nullptr;
+}
 
 void output(Node *hd) {
     if (!hd) {
