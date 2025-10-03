@@ -28,7 +28,7 @@ int main() {
     }
     output(head);
 
-    addTail(head, 111);
+    addTail(head, 111); //this addes 111 to the end 
     cout << "After adding to the tail:\n";
     output(head);
 
@@ -41,7 +41,7 @@ int main() {
     cin >> entry;
 
     // delete that node
-    deleteNode(head, entry); 
+    deleteNode(head, entry);  // deleting the chosen node
     cout << "After deleting:\n";
     output(head);
 
@@ -56,7 +56,7 @@ int main() {
     cout << "Choice --> ";
     cin >> entry;
 
-    insertNode(head, entry, 10000);
+    insertNode(head, entry, 10000); //used to insert node in chosen spot
     cout << "After insertion:\n";
     output(head);
 
@@ -73,7 +73,7 @@ int main() {
     return 0;
 }
 
-void addTail(Node* &head, float value) {
+void addTail(Node* &head, float value) {// add to the back of the list
     Node* newNode = new Node{value, nullptr};
     if (!head) head = newNode;
     else {
@@ -84,7 +84,7 @@ void addTail(Node* &head, float value) {
 }
 
 
-void addFront(Node* &head, float value) {
+void addFront(Node* &head, float value) {// add to the front of the list
     Node *newNode = new Node;
     newNode->value = value;
     newNode->next = head;
@@ -92,8 +92,8 @@ void addFront(Node* &head, float value) {
 }
 
 void deleteNode(Node* &head, int posit) {
+    // If list is empty or position is invalid, do nothing
     if (!head || posit < 1) return;
-
     Node *current = head;
     if (posit == 1) { 
         head = head->next;
@@ -111,7 +111,7 @@ void deleteNode(Node* &head, int posit) {
     }
 }
 
-void insertNode(Node* &head, int posit, float value) {
+void insertNode(Node* &head, int posit, float value) {// insert a node at a given position
     if (!head || posit < 1) return;
 
     Node *current = head;
@@ -127,6 +127,7 @@ void insertNode(Node* &head, int posit, float value) {
 }
 
 void deleteList(Node* &head) {
+    // delete all nodes in the list, set head to nullptr
     Node *current = head;
     while (current) {
         Node *nextNode = current->next;
