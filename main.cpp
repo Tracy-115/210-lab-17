@@ -8,7 +8,11 @@ struct Node {
     Node *next;
 };
 
-void output(Node *);
+void output(Node *hd);
+void addFront(Node* &head, float value);
+void deleteNode(Node* &head, int posit);
+void insertNode(Node* &head, int posit, float value);
+void deleteList(Node* head);
 
 int main() {
     Node *head = nullptr;
