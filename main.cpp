@@ -10,6 +10,7 @@ struct Node {
 
 void output(Node *hd);
 void addFront(Node* &head, float value);
+void addTail(Node* &head, float value);
 void deleteNode(Node* &head, int posit);
 void insertNode(Node* &head, int posit, float value);
 void deleteList(Node* &head);
@@ -25,7 +26,9 @@ int main() {
     }
     output(head);
 
-    
+    addTail(head, entry, 111);
+    cout << "After adding to the tail:\n";
+    output(head);
 
     // deleting a node
     Node * current = head;
@@ -67,22 +70,46 @@ int main() {
 
     return 0;
 }
+
+void addTail(Node* &head, float value) {
+    Node* newNode = new Node{value, nullptr};
+    if (!head) head = newNode;
+    else {
+        Node* cur = head;
+        while (cur->next) cur = cur->next;
+        cur->next = newNode;
+    }
+}
+
+}
+
 void addFront(Node* &head, float value) {
     Node *newNode = new Node;
     newNode->value = value;
     newNode->next = head;
     head = newNode;
 }
-void addBack(Node* &head, float value) {
-    Node *newNode = new Node{value, nullptr};
-    if (!head) {
-        head = newNode;
+
+void deleteNode(Node* &head, int posit) {
+    if (!head || posit < 1) return;
+
+    Node *current = head;
+    if (posit == 1) { 
+        head = head->next;
+        delete current;
         return;
     }
-    Node *current = head;
-    while (current->next) current = current->next;
-    current->next = newNode;
+    Node *prev = nullptr;
+    for (int i = 1; i < posit && current; i++) {
+        prev = current;
+        current = current->next;
+    }
+    if (current) {
+        prev->next = current->next;
+        delete current;
+    }
 }
+
 void insertNode(Node* &head, int posit, float value) {
     if (!head || posit < 1) return;
 
@@ -97,15 +124,16 @@ void insertNode(Node* &head, int posit, float value) {
         current->next = newNode;
     }
 }
-void deleteList(Node*& head){
-    Node* current = head;
-    while (current) {
-      Node* tmp = current ->next;
-      delete current;
-      current = tmp;
-    }
-    head = nullptr;
-}
+
+void deleteList(Node* &head) {
+    Node *current = head;
+    while (current) {
+        Node *nextNode = current->next;
+        delete current;
+        current = nextNode;
+    }
+    head = nullptr;
+
 void output(Node *hd) {
     if (!hd) {
         cout << "Empty list.\n";
