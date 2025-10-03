@@ -25,6 +25,8 @@ int main() {
     }
     output(head);
 
+    
+
     // deleting a node
     Node * current = head;
     cout << "Which node to delete? " << endl;
@@ -65,8 +67,45 @@ int main() {
 
     return 0;
 }
+void addFront(Node* &head, float value) {
+    Node *newNode = new Node;
+    newNode->value = value;
+    newNode->next = head;
+    head = newNode;
+}
+void addBack(Node* &head, float value) {
+    Node *newNode = new Node{value, nullptr};
+    if (!head) {
+        head = newNode;
+        return;
+    }
+    Node *current = head;
+    while (current->next) current = current->next;
+    current->next = newNode;
+}
+void insertNode(Node* &head, int posit, float value) {
+    if (!head || posit < 1) return;
 
-
+    Node *current = head;
+    for (int i = 1; i < posit && current; i++) {
+        current = current->next;
+    }
+    if (current) {
+        Node *newNode = new Node;
+        newNode->value = value;
+        newNode->next = current->next;
+        current->next = newNode;
+    }
+}
+void deleteList(Node*& head){
+    Node* current = head;
+    while (current) {
+      Node* tmp = current ->next;
+      delete current;
+      current = tmp;
+    }
+    head = nullptr;
+}
 void output(Node *hd) {
     if (!hd) {
         cout << "Empty list.\n";
